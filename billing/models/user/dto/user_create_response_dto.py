@@ -1,21 +1,28 @@
-class UserCreateDto:
-
+class UserCreateResponseDto:
+    __id: int
     __name: str
-    __password: str
     __email: str
 
-    def __init__(self, name, password, email) -> None:
+    def __init__(self, id, name, email) -> None:
+        self.__id = id
         self.__name = name
-        self.__password = password
         self.__email = email
 
     def __dict__(self):
         return {
+            'id': self.__id,
             'name': self.__name,
-            'password': self.__password,
             'email': self.__email
         }
 
+    @property
+    def id(self):
+        return self.__id
+    
+    @id.setter
+    def id(self, id):
+        self.__id = id
+    
     @property
     def name(self):
         return self.__name
@@ -23,14 +30,6 @@ class UserCreateDto:
     @name.setter
     def name(self, name):
         self.__name = name
-
-    @property
-    def password(self):
-        return self.__password
-    
-    @password.setter
-    def password(self, password):
-        self.__password = password
 
     @property
     def email(self):

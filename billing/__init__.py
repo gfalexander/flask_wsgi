@@ -2,7 +2,6 @@ import os
 
 from flask import Flask, request, jsonify
 from . import db
-from .auth import auth_bp
 
 from .utils import validate_body
 from .models.user.dto.user_create_dto import UserCreateDto
@@ -37,9 +36,6 @@ def create_app(test_config=None):
 
     # call db.init_app() from within the function
     db.init_app(app)
-
-    # register the auth blueprint
-    app.register_blueprint(auth_bp)
     
     @app.errorhandler(InvalidTypeException)
     def handle_invalid_type_exception(e):
@@ -51,7 +47,12 @@ def create_app(test_config=None):
     
     @app.errorhandler(Exception)
     def handle_exception(e):
+        print(e)
         return "Error", 500
     
+    # register the auth blueprint
+    from . import auth
+    app.register_blueprint(auth.bp)
+
     return app
     

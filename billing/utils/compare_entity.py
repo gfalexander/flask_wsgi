@@ -20,7 +20,7 @@ def validate_body(request_dict, dto):
             error_missing_key.append(key)
             continue
 
-        if not isinstance(request_dict[key], dto_dict[key]):
+        if not isinstance(request_dict[key], type(dto_dict[key])):
             error_invalid_type.append(key)
 
     if error_missing_key:
