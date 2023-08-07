@@ -4,7 +4,7 @@ from .exceptions import InvalidTypeException, MissingKeyException
 
 
 def validate_body(request_dict, dto):
-    
+
     if not isinstance(request_dict, dict):
         raise Exception("Body must be a dict")
 
@@ -12,8 +12,6 @@ def validate_body(request_dict, dto):
 
     error_missing_key = []
     error_invalid_type = []
-
-    
 
     for key in dto_dict:
         if key not in request_dict:
@@ -30,5 +28,3 @@ def validate_body(request_dict, dto):
     if error_invalid_type:
         message = "Invalid type(s): " + ", ".join(error_invalid_type)
         raise InvalidTypeException(message)
-                
-    print("OK")
